@@ -1,0 +1,6 @@
+
+FROM aghorbani/stable-diffusion-webui:base
+ENV DEBIAN_FRONTEND noninteractivee
+
+# ADD --chown=user https://huggingface.co/XpucT/Deliberate/resolve/main/Deliberate.safetensors /content/stable-diffusion-webui/models/Stable-diffusion/Deliberate.safetensors
+ADD --chown=user https://huggingface.co/XpucT/Deliberate/resolve/main/Deliberate_v2.safetensors /content/stable-diffusion-webui/models/Stable-diffusion/Deliberate_v2.safetensors
