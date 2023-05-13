@@ -100,5 +100,9 @@ RUN if [ ! -d "/content/stable-diffusion-webui/models/CLIP" ]; then mkdir -p /co
 
 Add --chown=user https://openaipublic.azureedge.net/clip/models/b8cca3fd41ae0c99ba7e8951adf17d267cdb84cd88be6f7c2e0eca1737a03836/ViT-L-14.pt /content/stable-diffusion-webui/models/CLIP/ViT-L-14.pt
 
-# CMD cd /content/stable-diffusion-webui && python webui.py --xformers --listen --enable-insecure-extension-access --gradio-queue
-CMD cd /content/stable-diffusion-webui && python webui.py --xformers --listen --enable-insecure-extension-access --gradio-queue --theme dark --clip-models-path /content/stable-diffusion-webui/models/CLIP --ckpt-dir /content/fused-models --lora-dir /content/fused-lora --multiple
+# Copy the entrypoint script into the container
+
+COPY entrypoint.sh /entrypoint.sh
+
+# Set the entrypoint script as the ENTRYPOINT
+ENTRYPOINT ["/entrypoint.sh"]

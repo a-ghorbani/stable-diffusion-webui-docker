@@ -30,4 +30,8 @@ docker run -it --rm \
   -p 8888:7860 \
   --runtime=nvidia --gpus all \
   -v "$(pwd)"/outputs:/content/stable-diffusion-webui/outputs \
+  -v "$(pwd)"/data:/content/stable-diffusion-webui/data \
+  -v "$(pwd)"/textual_inversion:/content/stable-diffusion-webui/textual_inversion \
   aghorbani/stable-diffusion-webui:"$TAG"
+
+#-v "$(pwd)"/styles.csv:/content/stable-diffusion-webui/styles.csv \

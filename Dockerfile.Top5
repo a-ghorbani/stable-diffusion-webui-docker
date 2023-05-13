@@ -1,0 +1,25 @@
+
+FROM aghorbani/stable-diffusion-webui:base
+ENV DEBIAN_FRONTEND noninteractivee
+
+# ---- Deliberate ----
+# ADD --chown=user https://huggingface.co/XpucT/Deliberate/resolve/main/Deliberate.safetensors /content/stable-diffusion-webui/models/Stable-diffusion/Deliberate.safetensors
+ADD --chown=user https://huggingface.co/XpucT/Deliberate/resolve/main/Deliberate_v2.safetensors /content/stable-diffusion-webui/models/Stable-diffusion/Deliberate_v2.safetensors
+
+# ---- Realistic Vision ----
+# Realism. Photorealism model, used for both celebrities and original characters. 
+# Try with ControlNet to turn cartoon characters into real life.
+ADD --chown=user https://huggingface.co/SG161222/Realistic_Vision_V2.0/resolve/main/Realistic_Vision_V2.0.safetensors /content/stable-diffusion-webui/models/Stable-diffusion/Realistic_Vision_V2.0.safetensors
+
+# ---- ReV Animated v1.2.2 ----
+# Fantasy, Anime, semi-realistic, decent Landscape
+ADD --chown=user https://civitai.com/api/download/models/46846  /content/stable-diffusion-webui/models/Stable-diffusion/revAnimated_v122.safetensors
+
+# ---- Dreamshaper ----
+# Fantasy art model
+# Illustration style with its beautiful digital art feel
+ADD --chown=user https://huggingface.co/Lykon/DreamShaper/resolve/main/DreamShaper_5_beta2_BakedVae_fp16.safetensors /content/stable-diffusion-webui/models/Stable-diffusion/DreamShaper_5_beta2_BakedVae_fp16.safetensors
+
+# ---- ChilloutMix ----
+# Mixed: photorealistic/NSFW
+ADD --chown=user https://civitai.com/api/download/models/11745 /content/stable-diffusion-webui/models/Stable-diffusion/chilloutmix_NiPrunedFp32Fix.safetensors
