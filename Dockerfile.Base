@@ -6,6 +6,8 @@
 FROM nvidia/cuda:11.7.1-base-ubuntu22.04
 ENV DEBIAN_FRONTEND noninteractive
 
+ENV REQS_FILE=./requirements_ext.txt
+
 RUN apt-get update -y && apt-get upgrade -y && apt-get install -y libgl1 libcairo2-dev libglib2.0-0 wget git git-lfs python3-pip python-is-python3 && rm -rf /var/lib/apt/lists/*
 
 RUN adduser --disabled-password --gecos '' user
@@ -43,6 +45,7 @@ RUN git clone https://github.com/AUTOMATIC1111/stable-diffusion-webui-rembg /con
 RUN git clone https://github.com/ashen-sensored/stable-diffusion-webui-two-shot /content/stable-diffusion-webui/extensions/stable-diffusion-webui-two-shot
 RUN git clone https://github.com/camenduru/sd_webui_stealth_pnginfo /content/stable-diffusion-webui/extensions/sd_webui_stealth_pnginfo
 RUN git clone https://github.com/thomasasfk/sd-webui-aspect-ratio-helper /content/stable-diffusion-webui/extensions/sd-webui-aspect-ratio-helper
+RUN git clone https://github.com/d8ahazard/sd_dreambooth_extension.git /content/stable-diffusion-webui/extensions/sd_dreambooth_extension
 
 ADD --chown=user https://huggingface.co/ckpt/ControlNet-v1-1/resolve/main/control_v11e_sd15_ip2p_fp16.safetensors /content/stable-diffusion-webui/extensions/sd-webui-controlnet/models/control_v11e_sd15_ip2p_fp16.safetensors
 ADD --chown=user https://huggingface.co/ckpt/ControlNet-v1-1/resolve/main/control_v11e_sd15_shuffle_fp16.safetensors /content/stable-diffusion-webui/extensions/sd-webui-controlnet/models/control_v11e_sd15_shuffle_fp16.safetensors
@@ -90,6 +93,8 @@ ADD --chown=user https://huggingface.co/ckpt/sd15/resolve/main/v1-5-pruned-emaon
 RUN sed -i -e '''/    prepare_environment()/a\    os.system\(f\"""sed -i -e ''\"s/dict()))/dict())).cuda()/g\"'' /content/stable-diffusion-webui/repositories/stable-diffusion-stability-ai/ldm/util.py""")''' /content/stable-diffusion-webui/launch.py
 RUN sed -i -e 's/    start()/    #start()/g' /content/stable-diffusion-webui/launch.py
 # RUN sed -i -e 's/fastapi==0.90.1/fastapi==0.89.1/g' /content/stable-diffusion-webui/requirements_versions.txt
+
+COPY --chown=user requirements_ext.txt /content/stable-diffusion-webui/requirements_ext.txt  
 RUN cd stable-diffusion-webui && python launch.py --skip-torch-cuda-test
 
 EXPOSE 7860
