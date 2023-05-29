@@ -33,6 +33,7 @@ docker run -it --rm \
   -v "$(pwd)"/data:/content/stable-diffusion-webui/data \
   -v "$(pwd)"/textual_inversion:/content/stable-diffusion-webui/textual_inversion \
   -v "$(pwd)"/embeddings:/content/stable-diffusion-webui/embeddings \
+  -v "$(pwd)"/new_models:/content/fused-models \
   aghorbani/stable-diffusion-webui:"$TAG"
 
 #-v "$(pwd)"/styles.csv:/content/stable-diffusion-webui/styles.csv \

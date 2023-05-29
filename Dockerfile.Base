@@ -20,7 +20,7 @@ RUN pip install torch==1.13.1+cu116 torchvision==0.14.1+cu116 torchaudio==0.13.1
 RUN pip install -q xformers==0.0.16 triton==2.0.0 -U
 RUN pip install numexpr
 
-RUN git clone -b v2.1 https://github.com/camenduru/stable-diffusion-webui 
+RUN git clone -b v2.2 https://github.com/camenduru/stable-diffusion-webui 
 RUN git clone https://huggingface.co/embed/negative /content/stable-diffusion-webui/embeddings/negative
 RUN git clone https://huggingface.co/embed/lora /content/stable-diffusion-webui/models/Lora/positive
 
